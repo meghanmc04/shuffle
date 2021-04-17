@@ -1,5 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
+const path = require("path");
+const { magentaBright, red } = require("chalk");
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -16,11 +18,11 @@ app.get("*", (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  console.error(err);
-  console.error(err.stack);
+  console.error(red(err));
+  console.error(red(err.stack));
   res.status(err.status || 500).send(err.message || "internal server error");
 });
 
 app.listen(port, () => {
-  console.log(`server listening on port ${port}`);
+  console.log(greenBright(`tell me something good on ${port}`));
 });
